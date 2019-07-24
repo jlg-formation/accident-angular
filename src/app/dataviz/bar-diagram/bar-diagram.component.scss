@@ -1,0 +1,43 @@
+app-bar-diagram {
+  .histo {
+    display: flex;
+    flex-flow: column;
+    width: 100%;
+    min-height: 20em;
+    background-color: #eee;
+    padding: 0.5em;
+
+    .dept {
+      display: flex;
+      align-items: center;
+      height: 1em;
+      margin: 0.2em 0;
+    }
+
+    .dept-num {
+      width: 2em;
+    }
+
+    .bar {
+      width: 0;
+      height: 1em;
+      background-color: red;
+    }
+
+    .nbr-accident {
+      opacity: 0;
+      transform: scale(0);
+      transition: all 300ms;
+    }
+
+    .bar.finished~.nbr-accident {
+      opacity: 1;
+      transform: scale(1);
+      margin: 0 0.2em;
+      font-size: 0.7em;
+    }
+
+  }
+}
+
+

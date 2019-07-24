@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './route/home/home.component';
 import { HistoComponent } from './route/histo/histo.component';
 import { LayoutModule } from './layout/layout.module';
+import { DatavizModule } from './dataviz/dataviz.module';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { LayoutModule } from './layout/layout.module';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    LayoutModule
+    LayoutModule,
+    DatavizModule
   ],
   providers: [],
   bootstrap: [AppComponent]
