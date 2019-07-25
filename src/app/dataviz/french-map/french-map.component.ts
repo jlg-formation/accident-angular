@@ -1,6 +1,5 @@
 import { Component, OnInit, ElementRef, ViewEncapsulation, Input, OnChanges, SimpleChanges } from '@angular/core';
 import * as d3 from 'd3';
-import { json } from 'd3';
 
 @Component({
   selector: 'app-french-map',
@@ -32,10 +31,6 @@ export class FrenchMapComponent implements OnInit, OnChanges {
     const width = 960;
     const height = 960;
     const scale = 4500;
-
-    const formatNumber = d3.format('s');
-
-
 
     const populationBins = this.getBins(this.json);
     const colorBins = populationBins.map(n => `hsl(240, 30%, ${100 - n * 100 / 3000000}%)`);
