@@ -1,0 +1,37 @@
+.border {
+  stroke-width: .3px;
+  fill: none;
+  stroke: #333;
+}
+
+.caption {
+  font-weight: bold;
+}
+
+.key path {
+  display: none;
+}
+
+.key line {
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+.departements {
+  stroke: #000;
+  stroke-width: 0.5px;
+  shape-rendering: crispEdges;
+}
+
+.tooltip {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 0.7em;
+  width: 200px;
+  height: 28px;
+  pointer-events: none;
+  background: black;
+  color: white;
+}

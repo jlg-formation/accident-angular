@@ -1,14 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewEncapsulation } from '@angular/core';
 import * as d3 from 'd3';
 
 @Component({
   selector: 'app-french-map',
   templateUrl: './french-map.component.html',
-  styleUrls: ['./french-map.component.scss']
+  styleUrls: ['./french-map.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class FrenchMapComponent implements OnInit {
 
-  constructor() { }
+  constructor(private elt: ElementRef) {}
 
   ngOnInit() {
 
@@ -46,11 +47,11 @@ export class FrenchMapComponent implements OnInit {
       const path = d3.geoPath()
         .projection(projection);
 
-      const tooltip = d3.select('body').append('div')
+      const tooltip = d3.select(this.elt.nativeElement).append('div')
         .attr('class', 'tooltip')
         .style('opacity', 0);
 
-      const svg = d3.select('body').append('svg')
+      const svg = d3.select(this.elt.nativeElement).append('svg')
         .attr('width', width)
         .attr('height', height);
 
@@ -76,7 +77,7 @@ export class FrenchMapComponent implements OnInit {
         .attr('y', -6)
         .text('Population');
 
-      const france = await d3.json('assets/geojson/departements.json');
+      const france: any = await d3.json('assets/geojson/departements.json');
       const population = await d3.csv('assets/data/population-departement.csv');
 
       const regions = svg.selectAll('.departements')
