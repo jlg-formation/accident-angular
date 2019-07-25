@@ -35,7 +35,9 @@ export class FrenchMapComponent implements OnInit, OnChanges {
 
     const formatNumber = d3.format('s');
 
-    const populationBins = [250000, 500000, 750000, 1000000, 1250000, 1500000, 2000000, 3000000];
+
+
+    const populationBins = this.getBins(this.json);
     const colorBins = populationBins.map(n => `hsl(240, 30%, ${100 - n * 100 / 3000000}%)`);
 
     const color = d3.scaleThreshold<number, string>()
@@ -118,6 +120,10 @@ export class FrenchMapComponent implements OnInit, OnChanges {
           .duration(500)
           .style('opacity', 0);
       });
+  }
+
+  getBins(json: any) {
+    return [250000, 500000, 750000, 1000000, 1250000, 1500000, 2000000, 3000000];
   }
 
 }
