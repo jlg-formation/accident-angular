@@ -9,7 +9,7 @@ import * as d3 from 'd3';
 })
 export class FrenchMapComponent implements OnInit {
 
-  constructor(private elt: ElementRef) {}
+  constructor(private elt: ElementRef) { }
 
   ngOnInit() {
 
@@ -18,7 +18,9 @@ export class FrenchMapComponent implements OnInit {
       // inspired by https://bl.ocks.org/bricedev/97c53d6ed168902239f7
 
       const width = 960;
-      const height = 700;
+      const height = 960;
+      const scale = 4500;
+
       const formatNumber = d3.format('s');
 
       const populationBins = [250000, 500000, 750000, 1000000, 1250000, 1500000, 2000000, 3000000];
@@ -41,7 +43,7 @@ export class FrenchMapComponent implements OnInit {
         .center([0, 49.5])
         .rotate([-2.8, 3])
         .parallels([45, 55])
-        .scale(3800)
+        .scale(scale)
         .translate([width / 2, height / 2]);
 
       const path = d3.geoPath()
@@ -52,8 +54,7 @@ export class FrenchMapComponent implements OnInit {
         .style('opacity', 0);
 
       const svg = d3.select(this.elt.nativeElement).append('svg')
-        .attr('width', width)
-        .attr('height', height);
+        .attr('viewBox', `0 0 ${width} ${height}`);
 
       const g = svg.append('g')
         .attr('class', 'key')
@@ -89,14 +90,14 @@ export class FrenchMapComponent implements OnInit {
           const paringData: any = population.filter((pop) => departement.properties.code === pop.numero)[0];
           return paringData ? color(paringData.population.replace(/,/g, '')) : color(0);
         })
-        .on('mouseover',  (d: any) => {
-          const paringData = population.filter( (pop) => d.properties.code === pop.numero)[0];
+        .on('mouseover', (d: any) => {
+          const paringData = population.filter((pop) => d.properties.code === pop.numero)[0];
           tooltip.transition()
             .duration(200)
             .style('opacity', .9);
           tooltip.html(`${d.properties.nom} (${d.properties.code}): ${paringData.population.replace(/,/g, ' ')}`)
             .style('left', (d3.event.pageX + 5) + 'px')
-            .style('top', (d3.event.pageY - 28) + 'px');
+            .style('top', (d3.event.pageY - 180) + 'px');
         })
         .on('mouseout', (d) => {
           tooltip.transition()

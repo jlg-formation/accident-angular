@@ -1,5 +1,21 @@
+app-french-map {
+  position: relative; /* If you want text inside of it */
+  display: block;
+  width: 100%;
+  max-width: 35em;
+  padding-top: 100%; /* 1:1 Aspect Ratio */
+
+  svg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+  }
+}
+
 .border {
-  stroke-width: .3px;
+  stroke-width: 0.3px;
   fill: none;
   stroke: #333;
 }
@@ -25,6 +41,7 @@
 
 .tooltip {
   position: absolute;
+  z-index: 1000;
   display: flex;
   justify-content: center;
   align-items: center;
