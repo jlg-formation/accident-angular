@@ -8,10 +8,14 @@ import * as d3 from 'd3';
 })
 export class ChoroplethComponent implements OnInit {
 
+  killed: any;
+
   constructor() { }
 
   ngOnInit() {
-    this.generateKilledFile();
+    (async () => {
+      this.killed = await this.generateKilledFile();
+    })();
   }
 
   async generateKilledFile() {
@@ -37,10 +41,11 @@ export class ChoroplethComponent implements OnInit {
       return {
         numero: r.numero,
         nom: r.nom,
-        population: k,
+        population: k + '',
       };
     });
     console.log('result', result);
+    return result;
   }
 
 }
