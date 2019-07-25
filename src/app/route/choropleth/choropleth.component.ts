@@ -19,6 +19,10 @@ export class ChoroplethComponent implements OnInit {
   }
 
   async generateKilledFile() {
+    const str = localStorage.getItem('app-choropleth');
+    if (str) {
+      return JSON.parse(str);
+    }
     const usagers = await d3.csv('assets/data/usagers-2017.csv');
     const caracteristics = await d3.csv('assets/data/caracteristiques-2017.csv');
     const popdep = await d3.csv('assets/data/population-departement.csv');
@@ -45,6 +49,7 @@ export class ChoroplethComponent implements OnInit {
       };
     });
     console.log('result', result);
+    localStorage.setItem('app-choropleth', JSON.stringify(result));
     return result;
   }
 
