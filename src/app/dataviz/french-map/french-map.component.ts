@@ -45,13 +45,13 @@ export class FrenchMapComponent implements OnInit, OnChanges {
       .range(['#deebf7', '#c6dbef', '#9ecae1', '#6baed6', '#4292c6', '#2171b5', '#08519c', '#08306b']);
 
     const x = d3.scaleLinear()
-      .domain([77156, 2579208])
+      .domain([0, this.getMax(this.json)])
       .range([0, 300]);
 
     const xAxis = d3.axisBottom(x)
       .tickSize(13)
       .tickValues(color.domain())
-      .tickFormat(d => formatNumber(d));
+      .tickFormat(d => d + '');
 
     const projection = d3.geoAlbers()
       .center([0, 49.5])
@@ -93,8 +93,8 @@ export class FrenchMapComponent implements OnInit, OnChanges {
       .text('Population');
 
     const france: any = await d3.json('assets/geojson/departements.json');
-    const population = await d3.csv('assets/data/population-departement.csv');
-    // const population = this.json;
+    // const population = await d3.csv('assets/data/population-departement.csv');
+    const population = this.json;
     console.log('population', population);
 
     const regions = svg.selectAll('.departements')
@@ -122,8 +122,17 @@ export class FrenchMapComponent implements OnInit, OnChanges {
       });
   }
 
-  getBins(json: any) {
-    return [250000, 500000, 750000, 1000000, 1250000, 1500000, 2000000, 3000000];
+  getBins(array: any) {
+    const length = 8;
+    const step = this.getMax(array) / length;
+    const result = new Array(length).fill(0).map((n, i) => (i + 1) * step);
+    console.log('result', result);
+    return result;
+  }
+
+  getMax(array: any) {
+    const a = array.map(r => +r.population).filter(r => !isNaN(r));
+    return Math.max(...a);
   }
 
 }
