@@ -11,6 +11,9 @@ export class FrenchMapComponent implements OnInit, OnChanges {
 
 
   @Input() json: any;
+  @Input() hue = '240';
+  @Input() contrast = 100;
+  @Input() saturation = 100;
 
   constructor(private elt: ElementRef) { }
 
@@ -33,11 +36,12 @@ export class FrenchMapComponent implements OnInit, OnChanges {
     const scale = 4500;
 
     const populationBins = this.getBins(this.json);
-    const colorBins = populationBins.map(n => `hsl(240, 30%, ${100 - n * 100 / 3000000}%)`);
+    const colorBins = populationBins.map(
+      n => `hsl(${this.hue}, ${this.saturation}%, ${100 - n * this.contrast / this.getMax(this.json)}%)`);
 
     const color = d3.scaleThreshold<number, string>()
       .domain(populationBins)
-      .range(['#deebf7', '#c6dbef', '#9ecae1', '#6baed6', '#4292c6', '#2171b5', '#08519c', '#08306b']);
+      .range(colorBins);
 
     const x = d3.scaleLinear()
       .domain([0, this.getMax(this.json)])
