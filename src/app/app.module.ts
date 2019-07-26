@@ -8,13 +8,15 @@ import { HistoComponent } from './route/histo/histo.component';
 import { LayoutModule } from './layout/layout.module';
 import { DatavizModule } from './dataviz/dataviz.module';
 import { ChoroplethComponent } from './route/choropleth/choropleth.component';
+import { WikidataComponent } from './route/wikidata/wikidata.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     HistoComponent,
-    ChoroplethComponent
+    ChoroplethComponent,
+    WikidataComponent
   ],
   imports: [
     BrowserModule,
