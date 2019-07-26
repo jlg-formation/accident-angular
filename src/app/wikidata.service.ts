@@ -5,11 +5,16 @@ import { Injectable } from '@angular/core';
 })
 export class WikidataService {
 
-
+  endpoint = 'https://query.wikidata.org/sparql';
   constructor() { }
 
-  request(sparql: string): Promise<any[]> {
-    return new Promise(resolve => resolve([2, 4]));
+  async request(sparql: string) {
+    const fullUrl = this.endpoint + '?query=' + encodeURIComponent(sparql);
+    const headers = { Accept: 'application/sparql-results+json' };
+
+    const body = await fetch(fullUrl, { headers });
+    const json = await body.json();
+    return json;
   }
 
 }
