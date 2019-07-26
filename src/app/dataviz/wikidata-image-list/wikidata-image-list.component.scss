@@ -3,6 +3,24 @@
   flex-wrap: wrap;
 }
 
+.panel {
+  margin: 0.5em;
+  border: 1px solid black;
+  animation: fade-in 1s;
+}
+
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+    transform: scale(0);
+  }
+
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
 .name {
   font-weight: bold;
 }
@@ -11,12 +29,12 @@
 .picture {
   display: flex;
   align-items: center;
-  width : 8em;
-  height: 12em;
+  width : 12em;
+  height: 18em;
   background: #eee;
   overflow: hidden;
 }
 
 img {
-  width: 8em;
+  width: 100%;
 }
